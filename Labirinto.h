@@ -5,6 +5,8 @@
 #ifndef Labirinto_h
 #define Labirinto_h
 
+using namespace std;
+
 class Labirinto {
 
 protected:
