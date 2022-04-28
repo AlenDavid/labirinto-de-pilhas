@@ -34,10 +34,12 @@ int main(){
 		"XXXXXXXXXXXXXXXXXXXSX",
 	};
 
-	posicaoAtual = procuraEntrada(labirinto);
+  Labirinto l = Labirinto();
+
+	posicaoAtual = l.procuraEntrada(labirinto);
 	cout << "Entrada: ("<<posicaoAtual[0]<<", "<<posicaoAtual[1]<<")\n\n";
 	while (!move.empty()){
-		if(!posicaoValida(posicaoAtual)){
+		if(!l.posicaoValida(posicaoAtual)){
 			cout << "Um erro inesperado ocorreu: Posição Inválida!\n";
 			break;
 		}
@@ -47,22 +49,22 @@ int main(){
 			parede = true;
 			break;
 		}
-		labirinto = alteraLabirinto(labirinto, posicaoAtual, '*');	
+		labirinto = l.alteraLabirinto(labirinto, posicaoAtual, '*');	
 		int &acaoAtual = move.back();
 		switch (acaoAtual){
 			case 4:
-				if(Livre(labirinto, SOBE(posicaoAtual))){
+				if(l.Livre(labirinto, l.SOBE(posicaoAtual))){
 					move.push_back(4);
-					posicaoAtual = SOBE(posicaoAtual);
+					posicaoAtual = l.SOBE(posicaoAtual);
 				}else{
 					acaoAtual--;
 				}
 				break;
 
 			case 3:
-				if(Livre(labirinto, DIREITA(posicaoAtual))){
+				if(l.Livre(labirinto, l.DIREITA(posicaoAtual))){
 					move.push_back(4);
-					posicaoAtual = DIREITA(posicaoAtual);
+					posicaoAtual = l.DIREITA(posicaoAtual);
 				}else{
 					acaoAtual--;
 				}
@@ -70,18 +72,18 @@ int main(){
 
 
 			case 2:
-				if(Livre(labirinto, DESCE(posicaoAtual))){
+				if(l.Livre(labirinto, l.DESCE(posicaoAtual))){
 					move.push_back(4);
-					posicaoAtual = DESCE(posicaoAtual);
+					posicaoAtual = l.DESCE(posicaoAtual);
 				}else{
 					acaoAtual--;
 				}
 				break;
 
 			case 1:
-				if(Livre(labirinto, ESQUERDA(posicaoAtual))){
+				if(l.Livre(labirinto, l.ESQUERDA(posicaoAtual))){
 					move.push_back(4);
-					posicaoAtual = ESQUERDA(posicaoAtual);
+					posicaoAtual = l.ESQUERDA(posicaoAtual);
 				}else{
 					acaoAtual--;
 				}
@@ -92,8 +94,8 @@ int main(){
 			move.pop_back();
 			if(move.empty()) continue;
 			int &acao = move.back();
-			labirinto = alteraLabirinto(labirinto, posicaoAtual, '!');
-			posicaoAtual = retornaPara(acao, posicaoAtual);
+			labirinto = l.alteraLabirinto(labirinto, posicaoAtual, '!');
+			posicaoAtual = l.retornaPara(acao, posicaoAtual);
 			acao--;
 		}
 		//mostraLabirinto(labirinto);
@@ -102,7 +104,7 @@ int main(){
 		//cout << "\n";
 	}
 	
-	mostraLabirinto(labirinto);
+	l.mostraLabirinto(labirinto);
 		
 	if(parede){
 		cout << "\nSaída: ("<<posicaoAtual[0]<<", "<<posicaoAtual[1]<<")\n";
